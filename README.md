@@ -5,7 +5,7 @@ Este documento presenta la memoria del trabajo realizado en el proyecto de predi
 ### <a name="_mv6huaq805dz"></a>**2.1. Preparación de Datos**
 El primer paso consistió en analizar las características proporcionadas en el dataset y determinar cuáles debían utilizarse para estructurar la tabla de entrenamiento. 
 
-(Si alguien, ha hecho un poco de estudio de correlaciones y distribuciones entre caracteristicas estaría bien compartirlo aqui)
+--------->>>>>>>>>  !!! (Si alguien, ha hecho un poco de estudio de correlaciones y distribuciones entre caracteristicas estaría bien compartirlo aqui) !!!
 
 Se calculó la variable objetivo **percentage\_docks\_available** utilizando la fórmula:
 
@@ -51,7 +51,7 @@ Finalmente, esta última estrategia permitió entrenar los modelos sin errores d
 
 El modelo **XGBoost** demostró ser la mejor opción, logrando la menor pérdida (MSE) y el mayor coeficiente de determinación (R²).
 ### <a name="_a1pxbtvl84o4"></a>**2.4. Incorporación de Variables Adicionales**
-Para mejorar la predicción, se exploró la incorporación de variables externas, en concreto los datos climáticos de Barcelona (temperatura media y humedad media). Esto permitió reducir ligeramente el error del modelo. (explicar mejor)
+Para mejorar la precisión del modelo, se evaluó la incorporación de variables exógenas, específicamente datos meteorológicos de Barcelona. Esta integración permitió una reducción marginal del error del modelo. Se emplearon series temporales históricas de temperatura y presión media diaria, obtenidas de múltiples estaciones de medición distribuidas por la ciudad (https://opendata-ajuntament.barcelona.cat/data/es/dataset/mesures-estacions-meteorologiques). Los datos fueron preprocesados y consolidados en un único dataframe, alineados temporalmente con las observaciones del modelo y utilizados tanto en la fase de entrenamiento como en la inferencia.
 
 Adicionalmente, se analizó el impacto de la pandemia eliminando los registros correspondientes a los meses de COVID-19, con el objetivo de evaluar si estos datos afectaban negativamente al modelo.
 ## <a name="_uo7v4ghnty9l"></a>**3. Estudios de Caso**
