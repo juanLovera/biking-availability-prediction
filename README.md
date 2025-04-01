@@ -80,4 +80,10 @@ Se presentan gráficos ilustrativos que validan estas tendencias.
 
 ![](Aspose.Words.2eff5c57-974c-4e44-ac04-8cddcf889079.004.png)
 
+### Equipo
+
+-Pablo Andrés Castillo Jiménez
+-Marc Gassol
+-Juan Jose Lovera Brito
+
 
