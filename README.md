@@ -54,7 +54,7 @@ El modelo **XGBoost** demostró ser la mejor opción, logrando la menor pérdida
 Para mejorar la precisión del modelo, se evaluó la incorporación de variables exógenas, específicamente datos meteorológicos de Barcelona. Esta integración permitió una reducción marginal del error del modelo. Se emplearon series temporales históricas de temperatura y presión media diaria, obtenidas de múltiples estaciones de medición distribuidas por la ciudad (https://opendata-ajuntament.barcelona.cat/data/es/dataset/mesures-estacions-meteorologiques). Los datos fueron preprocesados y consolidados en un único dataframe, alineados temporalmente con las observaciones del modelo y utilizados tanto en la fase de entrenamiento como en la inferencia.
 
 Adicionalmente, se analizó el impacto de la pandemia eliminando los registros correspondientes a los meses de COVID-19, con el objetivo de evaluar si estos datos afectaban negativamente al modelo.
-## <a name="_uo7v4ghnty9l"></a>**3. Estudios de Caso**
+## <a name="_uo7v4ghnty9l"></a>**3. Casos de Estudio**
 ### <a name="_i5thqedoiijt"></a>**3.1. Impacto de los Partidos del FC Barcelona en la Disponibilidad de Bicing**
 Se realizó un estudio específico para analizar cómo afectan los partidos del **FC Barcelona** en el **Camp Nou** a la disponibilidad de bicicletas en las estaciones más cercanas.
 #### <a name="_rxa0kmzyjg"></a>**Definición del Caso de Estudio**
