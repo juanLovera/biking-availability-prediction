@@ -5,8 +5,6 @@ Este documento presenta la memoria del trabajo realizado en el proyecto de predi
 ### <a name="_mv6huaq805dz"></a>**2.1. Preparación de Datos**
 El primer paso consistió en analizar las características proporcionadas en el dataset y determinar cuáles debían utilizarse para estructurar la tabla de entrenamiento. 
 
---------->>>>>>>>>  !!! (Si alguien, ha hecho un poco de estudio de correlaciones y distribuciones entre caracteristicas estaría bien compartirlo aqui) !!!
-
 Se calculó la variable objetivo **percentage\_docks\_available** utilizando la fórmula:
 
 ![](Aspose.Words.2eff5c57-974c-4e44-ac04-8cddcf889079.001.png)
@@ -22,7 +20,20 @@ for i **in** range(1, 5):  *# Creamos ctx-1 hasta ctx-4*
 
 `    `df[f"ctx-**{**i**}**"] = df.groupby("station\_id")["percentage\_docks\_available"].shift(i)
 
-### <a name="_h86bp9czyjg5"></a>**2.2. Primer Entrenamiento y Evaluación de Modelos**
+### **2.2. Exploración de la disponibilidad de anclajes**
+En esta primera figura se observar la evolución de la disponibilidad durante el año. En 2020, la evolución presenta diferencias en comparación con los demás años, pudiendo destacar una notoria caída en el uso de bicicletas entre marzo y principios de junio, coincidiendo con el confinamiento por la pandemia de COVID-19. En el resto de los meses, se puede observar como el uso se normaliza progresivamente y hacia finales de 2020 muestra un comportamiento similar al de los otros años.
+
+En cuanto a la variación mensual, la segunda figura muestra cómo cambia la disponibilidad de anclajes durante los meses. Se aprecia que el primer trimestre del año presenta el menor uso del servicio, seguido de un incremento durante el verano, cuando la demanda es mayor. A partir de noviembre el uso comienza a disminuir nuevamente.
+
+![](evolucion.png)
+
+![](dist_mensual.png)
+
+También se evaluó la disponibilidad por hora y mes para entender cuando suceden los momentos de mayor demanda. El mayor uso del servicio se realiza en horario laboral, siendo ligeramente superior por las tardes.
+
+![](disponibilidad_horames.png)
+
+### <a name="_h86bp9czyjg5"></a>**2.3. Primer Entrenamiento y Evaluación de Modelos**
 Para la fase inicial de entrenamiento, se utilizó un subconjunto de los datos, correspondiente a un mes de registros de Bicing. Se probaron diferentes modelos de entrenamiento, obteniendo los siguientes resultados:
 
 |**Modelo**|**MSE**|**R²**|
@@ -35,7 +46,7 @@ Para la fase inicial de entrenamiento, se utilizó un subconjunto de los datos, 
 |RNN|0\.0266|0\.7600|
 
 El modelo **Random Forest** mostró el mejor rendimiento en esta fase, por lo que se optó por continuar con él para pruebas adicionales.
-### <a name="_37i32o5sh8wz"></a>**2.3. Entrenamiento con el Dataset Completo (2020-2023)**
+### <a name="_37i32o5sh8wz"></a>**2.4. Entrenamiento con el Dataset Completo (2020-2023)**
 Se decidió ampliar el entrenamiento utilizando todos los registros desde 2020 hasta 2023. Sin embargo, al cargar el conjunto de datos completo, surgieron problemas de memoria. Se exploraron varias estrategias para solucionarlo:
 
 - Uso de la librería **Dask** para la aplicación de transformaciones previas antes de cargar los datos en memoria.
@@ -50,10 +61,10 @@ Finalmente, esta última estrategia permitió entrenar los modelos sin errores d
 |Regresión Lineal|0\.0128|0\.8500|
 
 El modelo **XGBoost** demostró ser la mejor opción, logrando la menor pérdida (MSE) y el mayor coeficiente de determinación (R²).
-### <a name="_a1pxbtvl84o4"></a>**2.4. Incorporación de Variables Adicionales**
+### <a name="_a1pxbtvl84o4"></a>**2.5. Incorporación de Variables Adicionales**
 Para mejorar la precisión del modelo, se evaluó la incorporación de variables exógenas, específicamente datos meteorológicos de Barcelona. Esta integración permitió una reducción marginal del error del modelo. Se emplearon series temporales históricas de temperatura y presión media diaria, obtenidas de múltiples estaciones de medición distribuidas por la ciudad (https://opendata-ajuntament.barcelona.cat/data/es/dataset/mesures-estacions-meteorologiques). Los datos fueron preprocesados y consolidados en un único dataframe, alineados temporalmente con las observaciones del modelo y utilizados tanto en la fase de entrenamiento como en la inferencia.
 
-Adicionalmente, se analizó el impacto de la pandemia eliminando los registros correspondientes a los meses de COVID-19, con el objetivo de evaluar si estos datos afectaban negativamente al modelo.
+Adicionalmente, debido a las diferencias observadas en la evolución de 2020, se analizó el impacto de la pandemia mediante dos enfoques: eliminando los registros correspondientes a los meses de confinamiento y añadiendo una variable binaria que indicara si la fecha pertenecía o no a la época de confinamiento. El objetivo era evaluar como afectaban estos datos al desempeño del modelo. Sin embargo, ninguno de los enfoques afectó a la capacidad predictiva del modelo. Finalmente, se decidió conservar todos los datos.
 ## <a name="_uo7v4ghnty9l"></a>**3. Casos de Estudio**
 ### <a name="_i5thqedoiijt"></a>**3.1. Impacto de los Partidos del FC Barcelona en la Disponibilidad de Bicing**
 Se realizó un estudio específico para analizar cómo afectan los partidos del **FC Barcelona** en el **Camp Nou** a la disponibilidad de bicicletas en las estaciones más cercanas.
