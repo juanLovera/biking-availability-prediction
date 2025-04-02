@@ -21,7 +21,7 @@ for i **in** range(1, 5):  *# Creamos ctx-1 hasta ctx-4*
 `    `df[f"ctx-**{**i**}**"] = df.groupby("station\_id")["percentage\_docks\_available"].shift(i)
 
 ### **2.2. Exploración de la disponibilidad de anclajes**
-En esta primera figura se observar la evolución de la disponibilidad durante el año. En 2020, la evolución presenta diferencias en comparación con los demás años, pudiendo destacar una notoria caída en el uso de bicicletas entre marzo y principios de junio, coincidiendo con el confinamiento por la pandemia de COVID-19. En el resto de los meses, se puede observar como el uso se normaliza progresivamente y hacia finales de 2020 muestra un comportamiento similar al de los otros años.
+En esta primera figura se observa la evolución de la disponibilidad durante el año. En 2020, la evolución presenta diferencias en comparación con los demás años, pudiendo destacar una notoria caída en el uso de bicicletas entre marzo y principios de junio, coincidiendo con el confinamiento por la pandemia de COVID-19. En el resto de los meses, se puede observar como el uso se normaliza progresivamente y hacia finales de 2020 muestra un comportamiento similar al de los otros años.
 
 En cuanto a la variación mensual, la segunda figura muestra cómo cambia la disponibilidad de anclajes durante los meses. Se aprecia que el primer trimestre del año presenta el menor uso del servicio, seguido de un incremento durante el verano, cuando la demanda es mayor. A partir de noviembre el uso comienza a disminuir nuevamente.
 
